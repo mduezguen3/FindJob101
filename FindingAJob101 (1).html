@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finding a Job 101 — Master Resource</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --ink:     #141414;
+  --ink2:    #3d3d3d;
+  --ink3:    #7a7a7a;
+  --ink4:    #b0b0b0;
+  --paper:   #f9f7f4;
+  --paper2:  #f2efe9;
+  --paper3:  #eae6de;
+  --white:   #ffffff;
+  --border:  #e2ddd5;
+  --border2: #cdc7bc;
+
+  --blue:     #1d59ff;
+  --blue-bg:  #eef2ff;
+  --blue-bd:  #c7d4fe;
+
+  --violet:   #6d28d9;
+  --violet-bg:#f3effe;
+  --violet-bd:#d4b9fc;
+
+  --teal:     #0a7c67;
+  --teal-bg:  #e8f7f3;
+  --teal-bd:  #a7ddd1;
+
+  --amber:    #b45309;
+  --amber-bg: #fef9ed;
+  --amber-bd: #f5d78a;
+
+  --coral:    #be3a2a;
+  --coral-bg: #fef2ee;
+  --coral-bd: #f5bbb0;
+
+  --r: 16px;
+  --r-sm: 10px;
+  --r-lg: 22px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(249,247,244,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 52px;
+}
+.nav-brand {
+  font-family: 'Instrument Serif', serif;
+  font-size: 17px; color: var(--ink); letter-spacing: -0.01em;
+}
+.nav-brand em { font-style: italic; color: var(--blue); }
+.nav-links { display: flex; gap: 2px; list-style: none; }
+.nav-links a {
+  color: var(--ink3); font-size: 13px; font-weight: 500;
+  padding: 5px 10px; border-radius: 7px; text-decoration: none;
+  transition: color .15s, background .15s;
+}
+.nav-links a:hover { color: var(--ink); background: var(--paper3); }
+
+.wrap { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+
+.hero { padding: 4rem 0 3.5rem; border-bottom: 1px solid var(--border); }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 1.25rem;
+}
+.hero-eyebrow span { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2.6rem, 5.5vw, 4rem);
+  font-weight: 400; line-height: 1.0;
+  letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1rem;
+}
+.hero h1 em { font-style: italic; color: var(--blue); }
+.hero-sub { font-size: 16px; color: var(--ink3); max-width: 500px; line-height: 1.7; margin-bottom: 2.25rem; }
+.hero-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill {
+  font-size: 12px; font-weight: 500; padding: 5px 13px; border-radius: 999px;
+  border: 1px solid var(--border2); background: var(--white); color: var(--ink2);
+  display: flex; align-items: center; gap: 5px;
+}
+.pill-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+.section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; }
+.section-num {
+  font-size: 11px; font-weight: 600; color: var(--ink4);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 9px; border: 1px solid var(--border2);
+  border-radius: 999px; background: var(--white);
+}
+.section-label { font-size: 11px; font-weight: 600; color: var(--ink4); letter-spacing: 0.08em; text-transform: uppercase; }
+.section > h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.75rem; font-weight: 400;
+  letter-spacing: -0.02em; color: var(--ink);
+  margin-bottom: 0.35rem; line-height: 1.1;
+}
+.section-sub { font-size: 14px; color: var(--ink3); margin-bottom: 1.5rem; max-width: 480px; }
+
+.cards-grid { display: grid; gap: 10px; }
+.cards-2 { grid-template-columns: 1fr 1fr; }
+.cards-1 { grid-template-columns: 1fr; }
+
+.card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 1.25rem 1.35rem;
+  display: flex; flex-direction: column; gap: 9px;
+  text-decoration: none; color: inherit;
+  transition: border-color .18s, box-shadow .18s;
+}
+.card:hover { border-color: var(--border2); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.card-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.card-arrow { font-size: 16px; color: var(--ink4); margin-top: 2px; flex-shrink: 0; }
+.card-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.card-desc { font-size: 13px; color: var(--ink3); line-height: 1.6; flex-grow: 1; }
+.card-tag { display: inline-flex; font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; width: fit-content; margin-top: auto; }
+
+.c-blue   .card-icon { background: var(--blue-bg); }
+.c-violet .card-icon { background: var(--violet-bg); }
+.c-teal   .card-icon { background: var(--teal-bg); }
+.c-amber  .card-icon { background: var(--amber-bg); }
+.c-coral  .card-icon { background: var(--coral-bg); }
+
+.tag-blue   { background: var(--blue-bg);   color: var(--blue);   border: 1px solid var(--blue-bd); }
+.tag-violet { background: var(--violet-bg); color: var(--violet); border: 1px solid var(--violet-bd); }
+.tag-teal   { background: var(--teal-bg);   color: var(--teal);   border: 1px solid var(--teal-bd); }
+.tag-amber  { background: var(--amber-bg);  color: var(--amber);  border: 1px solid var(--amber-bd); }
+.tag-coral  { background: var(--coral-bg);  color: var(--coral);  border: 1px solid var(--coral-bd); }
+
+.card.featured { border: 1.5px solid var(--blue-bd); }
+.card.featured:hover { border-color: var(--blue); }
+
+.tips { background: var(--paper2); border: 1px solid var(--border); border-radius: var(--r); padding: 1.1rem 1.35rem; margin-top: 10px; }
+.tips-head { font-size: 12px; font-weight: 600; color: var(--ink2); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.tip { display: flex; gap: 10px; padding: 7px 0; border-top: 1px solid var(--border); font-size: 13px; color: var(--ink3); line-height: 1.55; }
+.tip:first-of-type { border-top: none; padding-top: 0; }
+.tip-ck { color: var(--teal); flex-shrink: 0; font-weight: 700; font-size: 13px; }
+
+.mass-banner {
+  background: var(--ink); border-radius: var(--r-lg);
+  padding: 2rem 2rem; margin-bottom: 1.25rem;
+  position: relative; overflow: hidden;
+}
+.mass-banner::after {
+  content: '3k+';
+  position: absolute; right: -8px; top: -10px;
+  font-family: 'Instrument Serif', serif;
+  font-size: 8rem; line-height: 1;
+  color: rgba(255,255,255,0.04);
+  pointer-events: none; user-select: none;
+  letter-spacing: -0.04em;
+}
+.mass-banner h3 { font-family: 'Instrument Serif', serif; font-size: 1.7rem; font-weight: 400; color: #fff; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.mass-banner h3 em { font-style: italic; color: #93b4ff; }
+.mass-banner p { font-size: 13px; color: rgba(255,255,255,0.5); max-width: 440px; line-height: 1.65; margin-bottom: 1.25rem; }
+.banner-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.bchip { font-size: 11px; font-weight: 500; padding: 4px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.6); }
+
+.steps { display: flex; flex-direction: column; gap: 10px; }
+.step { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 1.25rem 1.35rem; display: flex; gap: 1.1rem; align-items: flex-start; }
+.step-n { width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: var(--white); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.step-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink4); margin-bottom: 3px; }
+.step-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.step-desc { font-size: 13px; color: var(--ink3); line-height: 1.6; margin-bottom: 10px; }
+.step-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--blue); background: var(--blue-bg); border: 1px solid var(--blue-bd); text-decoration: none; padding: 5px 12px; border-radius: 7px; transition: background .15s; margin-right: 6px; }
+.step-link:hover { background: var(--blue-bd); }
+
+.kbd { display: inline-flex; background: var(--paper2); border: 1px solid var(--border2); border-radius: 5px; padding: 1px 7px; font-size: 12px; font-weight: 600; color: var(--ink2); box-shadow: 0 1px 0 var(--border2); font-family: 'Inter', monospace; margin: 0 2px; }
+
+.inset { background: var(--paper2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 1rem 1.1rem; margin-top: 10px; }
+.inset-title { font-size: 12px; font-weight: 600; color: var(--ink2); margin-bottom: 5px; }
+.inset p { font-size: 13px; color: var(--ink3); line-height: 1.6; }
+.inset strong { color: var(--ink2); font-weight: 600; }
+
+.tracker { background: var(--teal-bg); border: 1px solid var(--teal-bd); border-radius: var(--r); padding: 1.25rem 1.35rem; margin-top: 10px; display: flex; gap: 1rem; align-items: flex-start; }
+.tracker-ico { width: 40px; height: 40px; border-radius: 10px; background: var(--white); border: 1px solid var(--teal-bd); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.tracker-title { font-size: 14px; font-weight: 600; color: var(--teal); margin-bottom: 4px; }
+.tracker-desc { font-size: 13px; color: var(--ink3); line-height: 1.55; margin-bottom: 10px; }
+.tracker-cols { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+.col-tag { font-size: 10px; font-weight: 500; color: var(--teal); background: var(--white); border: 1px solid var(--teal-bd); padding: 2px 8px; border-radius: 5px; }
+.dl-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--white); background: var(--teal); border: none; padding: 8px 16px; border-radius: 9px; text-decoration: none; cursor: pointer; transition: opacity .15s; }
+.dl-btn:hover { opacity: 0.88; }
+
+.tl { background: var(--paper2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 1.1rem 1.25rem; margin-top: 10px; }
+.tl-head { font-size: 12px; font-weight: 600; color: var(--ink2); margin-bottom: 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.tl-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0; position: relative; }
+.tl-row::before { content: ''; position: absolute; top: 10px; left: 10%; right: 10%; height: 1px; background: var(--border2); }
+.tl-col { display: flex; flex-direction: column; align-items: center; gap: 7px; position: relative; }
+.tl-dot-wrap { display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; }
+.tl-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border2); background: var(--paper2); display: flex; align-items: center; justify-content: center; }
+.tl-dot-core { width: 7px; height: 7px; border-radius: 50%; }
+.tl-name { font-size: 12px; font-weight: 600; color: var(--ink); text-align: center; }
+.tl-note { font-size: 11px; color: var(--ink3); text-align: center; line-height: 1.45; }
+
+.moti { background: var(--amber-bg); border: 1px solid var(--amber-bd); border-radius: var(--r); padding: 1.25rem 1.35rem; margin-top: 10px; display: flex; gap: 12px; align-items: flex-start; }
+.moti-ico { font-size: 22px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+.moti-text { font-size: 14px; color: var(--ink2); line-height: 1.65; }
+.moti-text strong { color: var(--amber); font-weight: 600; }
+
+footer { border-top: 1px solid var(--border); padding: 1.5rem 0; }
+.footer-inner { max-width: 780px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+.footer-left { font-size: 12px; color: var(--ink3); }
+.footer-left strong { color: var(--ink); font-weight: 600; }
+.footer-right { font-size: 12px; color: var(--ink4); }
+
+@media(max-width:640px){
+  .cards-2 { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.2rem; }
+  .tl-row { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tl-row::before { display: none; }
+  nav { padding: 0 1.25rem; }
+  .wrap { padding: 0 1.25rem; }
+  .nav-links { display: none; }
+  .mass-banner h3 { font-size: 1.4rem; }
+  .tracker { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Job <em>101</em></div>
+  <ul class="nav-links">
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#interview">Interview</a></li>
+    <li><a href="#formats">Formats</a></li>
+    <li><a href="#mass">Mass Apply</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="hero-eyebrow"><span></span> Career Toolkit · Complete Edition</div>
+    <h1>Finding a Job <em>101</em><br>Master Resource</h1>
+    <p class="hero-sub">Every tool, link, and strategy you need — from your first resume draft to your 3,000th application. Organized, clickable, and ready to go.</p>
+    <div class="hero-pills">
+      <div class="pill"><span class="pill-dot" style="background:var(--blue)"></span> 4 Sections</div>
+      <div class="pill"><span class="pill-dot" style="background:var(--violet)"></span> 7 Resources</div>
+      <div class="pill"><span class="pill-dot" style="background:var(--teal)"></span> 3,000+ Applications</div>
+      <div class="pill"><span class="pill-dot" style="background:var(--amber)"></span> 3 Months to Offer</div>
+    </div>
+  </section>
+
+  <!-- 01 RESUME -->
+  <section class="section" id="resume">
+    <div class="section-meta">
+      <span class="section-num">01</span>
+      <span class="section-label">Resume Tools</span>
+    </div>
+    <h2>Build a resume that gets past the bots</h2>
+    <p class="section-sub">Find the exact keywords recruiters and ATS systems are scanning for — then put them word-for-word in your resume.</p>
+
+    <div class="cards-grid cards-2">
+      <a href="https://www.onetonline.org/" target="_blank" class="card c-blue">
+        <div class="card-top">
+          <div class="card-icon">🔍</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div class="card-name">O*NET OnLine</div>
+        <div class="card-desc">Search any job title and get the official skills, tasks, and terminology used by real employers. Mirror this language exactly on your resume for ATS matching.</div>
+        <span class="card-tag tag-blue">Job Database</span>
+      </a>
+      <a href="https://www.onetsocautocoder.com/plus/onetmatch" target="_blank" class="card c-violet">
+        <div class="card-top">
+          <div class="card-icon">⚡</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div class="card-name">O*NET Auto-Coder</div>
+        <div class="card-desc">Paste your job title and instantly get the official SOC code and occupation classification — essential for getting past systems that filter by role type.</div>
+        <span class="card-tag tag-violet">ATS Optimizer</span>
+      </a>
+    </div>
+
+    <div class="tips">
+      <div class="tips-head">✦ Quick wins</div>
+      <div class="tip"><span class="tip-ck">✓</span> Copy the exact wording from the job posting — ATS does keyword matching, not synonym matching.</div>
+      <div class="tip"><span class="tip-ck">✓</span> Quantify every bullet: "reduced cycle time by 22%" beats "improved efficiency" every single time.</div>
+      <div class="tip"><span class="tip-ck">✓</span> One page unless you have 10+ years of directly relevant experience. No exceptions.</div>
+    </div>
+  </section>
+
+  <!-- 02 INTERVIEW -->
+  <section class="section" id="interview">
+    <div class="section-meta">
+      <span class="section-num">02</span>
+      <span class="section-label">Interview Prep</span>
+    </div>
+    <h2>Practice until it feels effortless</h2>
+    <p class="section-sub">Interviews are a skill. These two tools cover theory and practice — use both, in order.</p>
+
+    <div class="cards-grid cards-1">
+      <a href="https://resources.depaul.edu/career-center/resumes-interviews/interviews/Pages/default.aspx" target="_blank" class="card c-teal">
+        <div class="card-top">
+          <div class="card-icon">🏫</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div class="card-name">DePaul Career Center — Interview Guide</div>
+        <div class="card-desc">Covers every interview format (behavioral, technical, case, panel), the STAR method, salary negotiation, and thank-you note templates. Start here for the foundation before you practice on camera.</div>
+        <span class="card-tag tag-teal">Free Access</span>
+      </a>
+      <a href="https://depaul.biginterview.com/" target="_blank" class="card c-amber featured">
+        <div class="card-top">
+          <div class="card-icon">🎬</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div class="card-name">Big Interview — On-Camera Practice</div>
+        <div class="card-desc">Record yourself answering real interview questions and get AI feedback on delivery, pacing, and filler words. Industry-specific question banks for engineering, tech, healthcare, and more. Use it before every interview — not just the first one. Log in with your DePaul credentials.</div>
+        <span class="card-tag tag-amber">🔐 DePaul Login Required</span>
+      </a>
+    </div>
+
+    <div class="tips">
+      <div class="tips-head">✦ Quick wins</div>
+      <div class="tip"><span class="tip-ck">✓</span> STAR method for every behavioral question: Situation → Task → Action → Result. Practice until automatic.</div>
+      <div class="tip"><span class="tip-ck">✓</span> Watch your Big Interview recordings at 1.5× speed — filler words and run-ons are immediately obvious.</div>
+      <div class="tip"><span class="tip-ck">✓</span> Thank-you email within 24 hrs. One paragraph, reference something specific from the actual conversation.</div>
+    </div>
+  </section>
+
+  <!-- 03 FORMATS -->
+  <section class="section" id="formats">
+    <div class="section-meta">
+      <span class="section-num">03</span>
+      <span class="section-label">Resume, Cover Letter &amp; Email Formats</span>
+    </div>
+    <h2>Layouts that actually get read</h2>
+    <p class="section-sub">Don't reinvent the wheel. These are ATS-friendly, recruiter-approved, and proven across engineering and tech.</p>
+
+    <div class="cards-grid cards-1">
+      <a href="https://career.gatech.edu/resumes/" target="_blank" class="card c-coral">
+        <div class="card-top">
+          <div class="card-icon">🐝</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div class="card-name">Georgia Tech Career Center — Templates &amp; Formats</div>
+        <div class="card-desc">Resume layouts, cover letter structures, and professional email templates from GT's career development team. Download and adapt — these formats work across engineering, biomedical, and tech roles. Cover letters should answer: why you, why this role, why this company — in that order.</div>
+        <span class="card-tag tag-coral">Templates + Examples</span>
+      </a>
+    </div>
+
+    <div class="tips">
+      <div class="tips-head">✦ Quick wins</div>
+      <div class="tip"><span class="tip-ck">✓</span> Your cover letter answers three questions in order: why you, why this role, why this company. That's the whole formula.</div>
+      <div class="tip"><span class="tip-ck">✓</span> Email subject line: "[Your Name] — [Role] Application" — simple and direct wins every time.</div>
+      <div class="tip"><span class="tip-ck">✓</span> No response after 7 business days? One polite follow-up email. That's professional, not annoying.</div>
+    </div>
+  </section>
+
+  <!-- 04 MASS APPLY -->
+  <section class="section" id="mass">
+    <div class="section-meta">
+      <span class="section-num">04</span>
+      <span class="section-label">The Game Changer</span>
+    </div>
+    <h2>The art of mass applying</h2>
+    <p class="section-sub">Volume is the strategy. This is how you engineer your own luck — and land interviews through sheer momentum.</p>
+
+    <div class="mass-banner">
+      <h3>Apply to <em>3,000+ jobs.</em><br>Land the one that matters.</h3>
+      <p>This isn't spray and pray — it's a systematic, high-volume approach that creates interview reps, builds confidence, and eventually closes offers.</p>
+      <div class="banner-chips">
+        <div class="bchip">50 tabs per session</div>
+        <div class="bchip">Track every application</div>
+        <div class="bchip">3 months of daily volume</div>
+        <div class="bchip">Keep applying through interviews</div>
+      </div>
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          <div class="step-eyebrow">Start here</div>
+          <div class="step-title">Get the Top 50 Tech Company List</div>
+          <div class="step-desc">OutTalent's US Top 50 is a curated list of the best tech employers in the country. These are your targets. Bookmark it and work through every company systematically.</div>
+          <a href="https://outtalent.com/us50/" target="_blank" class="step-link">outtalent.com/us50 ↗</a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          <div class="step-eyebrow">Find their careers page</div>
+          <div class="step-title">Search "[Company Name] Careers" — Go Direct</div>
+          <div class="step-desc">For each company on the list, search their name + "careers" and go straight to their official site — not LinkedIn, not Indeed. Direct applications consistently get better response rates. Start with Google as your first example:</div>
+          <a href="https://www.google.com/about/careers/applications/" target="_blank" class="step-link">Google Careers ↗</a>
+          <div class="inset">
+            <div class="inset-title">What you'll see on the careers page</div>
+            <p>A list of job postings — each one is a potential application. Scroll through and identify every role that could be even a rough fit. Cast wide. A "close enough" application is absolutely worth sending.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-body">
+          <div class="step-eyebrow">The power move</div>
+          <div class="step-title">Open 50+ Job Tabs Using CTRL + Click</div>
+          <div class="step-desc">On the careers listings page, hold down <span class="kbd">Ctrl</span> (Windows) or <span class="kbd">⌘</span> (Mac) and <strong>left-click</strong> every relevant job title. Each click opens that posting in a new background tab — without losing your place on the main list.</div>
+          <div class="inset">
+            <div class="inset-title">How it works</div>
+            <p><span class="kbd">Ctrl</span> + <strong>Left Click</strong> → opens posting in a new background tab<br><br>Repeat on every relevant listing until you have <strong>50+ tabs open</strong>, then go through each tab and submit the application. This is how you apply to 50 jobs in a single focused session.</p>
+          </div>
+          <div class="inset" style="margin-top:8px; border-color:var(--blue-bd); background:var(--blue-bg);">
+            <div class="inset-title" style="color:var(--blue)">🎯 Session goal</div>
+            <p style="color:var(--ink2)">Open 50 tabs → Submit all 50 applications → Log them in your tracker → Close tabs → Repeat next session.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">4</div>
+        <div class="step-body">
+          <div class="step-eyebrow">Stay organized</div>
+          <div class="step-title">Track Every Application in the Spreadsheet</div>
+          <div class="step-desc">After every session, log every application you submitted. When a recruiter calls unexpectedly, you need to know what you applied for and when. The tracker also reveals which companies are converting to callbacks.</div>
+          <div class="tracker">
+            <div class="tracker-ico">📊</div>
+            <div class="tracker-body">
+              <div class="tracker-title">Job Application Tracker — StandOut CV Format</div>
+              <div class="tracker-desc">Pre-built spreadsheet with every column you need, from first application to final offer. Log everything — even the ones that go silent.</div>
+              <div class="tracker-cols">
+                <span class="col-tag">Company</span>
+                <span class="col-tag">Role Title</span>
+                <span class="col-tag">Salary</span>
+                <span class="col-tag">Job Link</span>
+                <span class="col-tag">Date Applied</span>
+                <span class="col-tag">Contact</span>
+                <span class="col-tag">Response</span>
+                <span class="col-tag">Interview Stage</span>
+                <span class="col-tag">Interview Details</span>
+                <span class="col-tag">Offer</span>
+              </div>
+              <a href="Job_Tracker.xlsx" download class="dl-btn">⬇ Download Job Tracker (.xlsx)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">5</div>
+        <div class="step-body">
+          <div class="step-eyebrow">The mindset</div>
+          <div class="step-title">Never Stop the Pipeline — Even When Interviews Start</div>
+          <div class="step-desc">This is the rule most people break. They get an interview, stop applying, the interview doesn't go anywhere, and they've lost two weeks of momentum. <strong>Keep applying every single day.</strong> Interviews are a good sign — not a reason to pause. In our virtual meetings we'll sharpen your resume and interview skills in parallel as the volume rolls in.</div>
+
+          <div class="tl">
+            <div class="tl-head">📅 The 3-month plan</div>
+            <div class="tl-row">
+              <div class="tl-col">
+                <div class="tl-dot-wrap"><div class="tl-dot"><div class="tl-dot-core" style="background:var(--blue)"></div></div></div>
+                <div class="tl-name">Month 1</div>
+                <div class="tl-note">Build the pipeline. Apply daily. No results yet — completely normal.</div>
+              </div>
+              <div class="tl-col">
+                <div class="tl-dot-wrap"><div class="tl-dot"><div class="tl-dot-core" style="background:var(--violet)"></div></div></div>
+                <div class="tl-name">Month 2</div>
+                <div class="tl-note">Interviews begin. Keep applying. Refine skills with every rep.</div>
+              </div>
+              <div class="tl-col">
+                <div class="tl-dot-wrap"><div class="tl-dot"><div class="tl-dot-core" style="background:var(--teal)"></div></div></div>
+                <div class="tl-name">Month 3</div>
+                <div class="tl-note">Final rounds. Offers start arriving. You choose the best one.</div>
+              </div>
+              <div class="tl-col">
+                <div class="tl-dot-wrap"><div class="tl-dot" style="border-color:var(--amber-bd)"><div class="tl-dot-core" style="background:var(--amber)"></div></div></div>
+                <div class="tl-name">Landed 🎉</div>
+                <div class="tl-note">New role starts. 3,000+ applications paid off.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="moti">
+            <div class="moti-ico">🔥</div>
+            <div class="moti-text"><strong>The numbers game is real.</strong> If 1 in 100 applications leads to an interview and 1 in 5 interviews leads to an offer, you need ~500 applications for one offer. Apply to 3,000 and you'll have multiple offers to choose from. Volume is the strategy — show up every day, work the tracker, and trust the process. The coaching we do in our sessions will sharpen both ends of the funnel at the same time.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left"><strong>Finding a Job 101</strong> &nbsp;·&nbsp; Master Resource Guide</div>
+    <div class="footer-right">Keep applying. Every single day.</div>
+  </div>
+</footer>
+
+</body>
+</html>
